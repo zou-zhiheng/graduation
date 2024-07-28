@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+option go_package = "gateway/api/common";
+
+package common;
+
+message DataDetail {
+  // 1. 键名称
+  string key = 1;
+  // 2. 键值
+  float value = 2;
+  // 3. 单位
+  string unit = 3;
+}
+
+message DeviceData {
+  // 1. 设备编号
+  string code = 1;
+  // 2. 详细数据
+  repeated DataDetail data = 2;
+  // 3. 创建时间
+  string createTime = 3;
+}

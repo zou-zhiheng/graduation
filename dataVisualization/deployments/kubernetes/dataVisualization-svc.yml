@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: data-visualization-svc
+  namespace: data-visualization
+spec:
+  selector:
+    app: data-visualization
+  type: ClusterIP
+  ports:
+    - name: data-visualization-svc-grpc-port
+      port: 8282
+      targetPort: 8282
+    - name: data-visualization-svc-grpc-metrics-port
+      port: 8283
+      targetPort: 8283
+

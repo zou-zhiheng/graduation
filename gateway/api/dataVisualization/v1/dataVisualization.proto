@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package api.dataVisualization.v1;
+
+//import "validate/validate.proto";
+//import "google/protobuf/any.proto";
+option go_package = "dataVisualization/api/dataVisualization/v1;v1";
+//import "google/protobuf/struct.proto";
+
+service DataVisualization {
+
+  //设备数据查询
+  rpc DeviceDataGet(DeviceDataGetReq) returns (DeviceDataGetRes){};
+  //折线图，当天，七天，近一个月
+  rpc DeviceDataCurve(DeviceDataCurveReq) returns (DeviceDataCurveRes){};
+
+}
+
+message DeviceDataGetReq {
+  // 1. 设备名称
+  string name = 1;
+  // 2. 设备编号
+  string code = 2;
+  // 3. 页大小
+  uint64 pageSize = 3;
+  // 4. 开始时间
+  string startTime = 4;
+  // 5. 结束时间
+  string endTime = 5;
+  // 6. 页码
+  uint64 currPage = 6;
+  // 7. 用户ID
+  uint64 userId = 7;
+}
+
+
+message DataDetail {
+  // 1. 键名称
+  string key = 1;
+  // 2. 键值
+  float value = 2;
+  // 3. 单位
+  string unit = 3;
+}
+
+message DeviceData {
+  // 1. 设备数据
+  repeated DataDetail data = 3;
+  // 2. 创建时间
+  string createTime = 4;
+}
+
+message DeviceDataGetRes {
+  // 1. 设备名称
+  string name = 1;
+  // 2. 设备编号
+  string code = 2;
+  // 3. 设备数据
+  repeated DeviceData data = 3;
+  // 4. 数据量
+  uint64 count = 4;
+}
+
+enum IntervalType{
+  // 1. 空
+  Null = 0;
+  // 2. 天
+  Day = 1;
+  // 3. 星期
+  Week = 2;
+  // 4 . 月
+  Month = 3;
+}
+
+enum ChartType {
+  // 1. 空
+  ChartTypeNull = 0;
+  // 1.饼图
+  Pip = 1;
+  // 2.折线图
+  Line = 2;
+}
+
+message DeviceDataCurveReq{
+  // 1. 用户ID
+  uint64 userId = 1;
+  // 2. 设备编号
+  string deviceCode = 2;
+  // 3. 时间间隔
+  IntervalType interval = 3;
+  // 4. 图类型
+  repeated ChartType chartType = 4;
+}
+
+message DataLine {
+   //1. 名称
+   repeated string key = 1;
+   //2. 值
+   repeated float value = 2;
+}
+
+message DeviceDataCurveRes {
+   //1. 近一个月数据量
+   DataLine month = 1;
+   //2. 饼图
+   DataLine pip = 2;
+   //3. 折线图
+   DataLine line = 3;
+   //4. 电流
+   DataLine elect = 4;
+   //5. 电压
+   DataLine volt = 5;
+}

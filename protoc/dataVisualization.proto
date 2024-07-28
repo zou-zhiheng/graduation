@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package api.manager.v1;
+
+//import "validate/validate.proto";
+//import "google/protobuf/any.proto";
+option go_package = "dataVisualization/api/dataVisualization/v1;v1";
+//import "google/protobuf/struct.proto";
+
+service DataVisualization {
+
+  //设备数据查询
+  rpc DeviceDataGet(DeviceDataGetReq) returns (DeviceDataGetRes){};
+
+}
+
+message DeviceDataGetReq {
+  // 1. 设备名称
+  string name = 1;
+  // 2. 设备编号
+  string code = 2;
+  // 3. 页大小
+  uint64 pageSize = 3;
+  // 4. 开始时间
+  string startTime = 4;
+  // 5. 结束时间
+  string endTime = 5;
+  // 6. 页码
+  uint64 currPage = 6;
+  // 7. 用户ID
+  uint64 userId = 7;
+}
+
+
+message DataDetail {
+  // 1. 键名称
+  string key = 1;
+  // 2. 键值
+  string value = 2;
+  // 3. 单位
+  string unit = 3;
+}
+
+message DeviceDataGetRes {
+  // 1. 设备名称
+  string name = 1;
+  // 2. 设备编号
+  string code = 2;
+  // 3. 设备数据
+  repeated DataDetail data = 3;
+}

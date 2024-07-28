@@ -1,0 +1,564 @@
+syntax = "proto3";
+
+package api.manager.v1;
+
+//import "validate/validate.proto";
+//import "google/protobuf/any.proto";
+option go_package = "manager/api/manager/v1;v1";
+//import "google/protobuf/struct.proto";
+
+service Manager {
+  // 登录
+  rpc Login(LoginReq) returns (LoginRes){};
+  // 用户注册
+  rpc UserRegister(UserRegisterReq) returns (OperationRes){};
+  // 用户查询
+  rpc UserGet(UserGetReq) returns (UserGetRes){};
+  // 用户修改
+  rpc UserUpdate(UserUpdateReq) returns (OperationRes){};
+  // 密码重置
+  rpc ResetPassword(ResetPasswordReq) returns (OperationRes){};
+  // 用户注销
+  rpc UserDelete(UserDeleteReq) returns (OperationRes){};
+
+
+  // 角色创建
+  rpc RoleCreate(RoleCreateReq) returns (OperationRes){};
+  // 角色查询
+  rpc RoleGet(RoleGetReq) returns (RoleGetRes){};
+  // 角色修改
+  rpc RoleUpdate(RoleUpdateReq) returns (OperationRes){};
+  // 角色删除
+  rpc RoleDelete(RoleDeleteReq) returns (OperationRes){};
+
+
+  // 接口创建
+  rpc ApiCreate(ApiCreateReq) returns (OperationRes){};
+  // 接口查询
+  rpc ApiGet(ApiGetReq) returns (ApiGetRes){};
+  // 接口修改
+  rpc ApiUpdate(ApiUpdateReq) returns (OperationRes){};
+  // 接口删除
+  rpc ApiDelete(ApiDeleteReq) returns (OperationRes){};
+
+  // 设备创建
+  rpc DeviceCreate(DeviceCreateReq) returns (OperationRes){};
+  // 设备查询
+  rpc DeviceGet(DeviceGetReq) returns (DeviceGetRes) {};
+  // 设备修改
+  rpc DeviceUpdate(DeviceUpdateReq) returns (OperationRes) {};
+  // 设备删除
+  rpc DeviceDelete(DeviceDeleteReq) returns (OperationRes) {};
+
+  // 设备类型创建
+  rpc DeviceTypeCreate(DeviceTypeCreateReq) returns (OperationRes) {};
+  // 设备类型查询
+  rpc DeviceTypeGet(DeviceTypeGetReq) returns (DeviceTypeGetRes) {};
+  // 设备类型修改
+  rpc DeviceTypeUpdate(DeviceTypeUpdateReq) returns (OperationRes) {};
+  // 设备类型删除
+  rpc DeviceTypeDelete(DeviceTypeDeleteReq) returns (OperationRes) {};
+
+  // 用户设备信息创建
+  rpc UserDeviceCreate(UserDeviceCreateReq) returns (OperationRes) {};
+  // 用户设备信息查询
+  rpc UserDeviceGet(UserDeviceGetReq) returns (UserDeviceGetRes) {};
+  // 用户设备信息删除
+  rpc UserDeviceDelete(UserDeviceDeleteReq) returns (OperationRes) {};
+
+}
+
+// 用户
+message User {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 名称
+  string name = 2;
+  // 3. 账户
+  string account = 3;
+  // 4. 头像地址
+  string avatarUrl = 4;
+  // 5. 是否启用
+  uint32 isValid = 5;
+  // 6. 性别
+  string sex = 6;
+  // 7. 电话号码
+  string phone = 7;
+  // 8. roleID
+  uint64 roleId = 8;
+  // 9. 密码
+  string password =9;
+}
+
+// 登录请求参数
+message LoginReq {
+  // 1. 账户
+  string account = 1;
+
+  // 2. 密码
+  string password = 2;
+}
+
+//登录响应参数
+message LoginRes {
+  // 1. token
+  string token = 1;
+}
+
+
+//用户注册请求参数
+message UserRegisterReq {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 名称
+  string name = 2;
+  // 3. 账户
+  string account = 3;
+  // 4. 头像地址
+  string avatarUrl = 4;
+  // 5. 是否启用
+  uint32 isValid = 5;
+  // 6. 性别
+  string sex = 6;
+  // 7. 电话号码
+  string phone = 7;
+  // 8. roleIDs
+  repeated uint64 roleIds = 8;
+  // 9. 密码
+  string password =9;
+}
+
+//用户查询请求参数
+message UserGetReq {
+ // 1. ID
+ uint64 id = 1;
+ // 2. 名称
+ string name = 2;
+ // 3. 手机号
+ string phone = 3;
+ // 4. 页码
+ uint64 currPage = 4;
+ // 5. 页大小
+ uint64 pageSize = 5;
+ // 6. 开始时间
+ string startTime = 6;
+ // 7. 结束时间
+ string endTime = 7;
+}
+
+message UserGetRes {
+  repeated User user = 1;
+  uint64 count = 2;
+}
+
+//用户修改请求参数
+message UserUpdateReq {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 名称
+  string name = 2;
+  // 3. 账户
+  string account = 3;
+  // 4. 头像地址
+  string avatarUrl = 4;
+  // 5. 是否启用
+  uint32 isValid = 5;
+  // 6. 性别
+  string sex = 6;
+  // 7. 电话号码
+  string phone = 7;
+  // 8. roleID
+  repeated uint64 roleId = 8;
+}
+
+
+//用户密码重置请求参数
+message ResetPasswordReq {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 名称
+  string name = 2;
+  // 3. 账户
+  string account = 3;
+  // 4. 头像地址
+  string avatarUrl = 4;
+  // 5. 是否启用
+  uint32 isValid = 5;
+  // 6. 性别
+  string sex = 6;
+  // 7. 电话号码
+  string phone = 7;
+  // 8. roleID
+  uint64 roleId = 8;
+  // 9. 密码
+  string password =9;
+}
+
+//用户注销请求参数
+message UserDeleteReq {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 名称
+  string name = 2;
+  // 3. 账户
+  string account = 3;
+  // 4. 头像地址
+  string avatarUrl = 4;
+  // 5. 是否启用
+  uint32 isValid = 5;
+  // 6. 性别
+  string sex = 6;
+  // 7. 电话号码
+  string phone = 7;
+  // 8. roleID
+  uint64 roleId = 8;
+  // 9. 密码
+  string password =9;
+}
+
+
+
+// 角色
+message Role {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 名称
+  string name = 2;
+  // 3. 编号
+  string code = 3;
+  // 4. 接口
+  repeated uint64 apis = 4;
+  // 5. 描述
+  string desc = 5;
+}
+
+
+//角色创建请求参数
+message RoleCreateReq {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 名称
+  string name = 2;
+  // 3. 编号
+  string code = 3;
+  // 4. 接口
+  repeated uint64 apis = 4;
+  // 5. 描述
+  string desc = 5;
+}
+
+
+//角色查询
+message RoleGetReq {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 编号
+  string code = 2;
+  // 3. 名称
+  string name = 3;
+  // 4. 页码
+  uint64 currPage = 4;
+  // 5. 页大小
+  uint64 pageSize = 5;
+  // 6. 开始时间
+  string startTime = 6;
+  // 7. 结束时间
+  string endTime = 7;
+}
+
+//角色查询响应参数
+message RoleGetRes {
+  repeated Role role = 1;
+  uint64 count = 2;
+}
+
+//角色修改
+message RoleUpdateReq {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 名称
+  string name = 2;
+  // 3. 编号
+  string code = 3;
+  // 4. 接口
+  repeated uint64 apis = 4;
+  // 5. 描述
+  string desc = 5;
+}
+
+//角色删除
+message RoleDeleteReq {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 名称
+  string name = 2;
+  // 3. 编号
+  string code = 3;
+  // 4. 接口
+  repeated uint64 apis = 4;
+  // 5. 描述
+  string desc = 5;
+}
+
+
+// 接口
+message Api {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 名称
+  string name = 2;
+  // 3. 路径
+  string url = 3;
+  // 4. 方法
+  string method = 4;
+  // 5. 描述
+  string desc = 5;
+}
+
+
+//接口创建
+message ApiCreateReq {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 名称
+  string name = 2;
+  // 3. 路径
+  string url = 3;
+  // 4. 方法
+  string method = 4;
+  // 5. 描述
+  string desc = 5;
+}
+
+
+//接口查询
+message ApiGetReq {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 名称
+  string name = 2;
+  // 3. 路径
+  string url = 3;
+  // 4. 方法
+  string method = 4;
+  // 5. 页大小
+  uint64 pageSize = 5;
+  // 6. 开始时间
+  string startTime = 6;
+  // 7. 结束时间
+  string endTime = 7;
+  // 8. 页码
+  uint64 currPage = 8;
+}
+
+//接口查询响应参数
+message ApiGetRes {
+  repeated Api api = 1;
+  uint64 count = 2;
+}
+
+//接口修改
+message ApiUpdateReq {
+  // 1. ID
+  uint64 id = 1;
+  // 2. 名称
+  string name = 2;
+  // 3. 路径
+  string url = 3;
+  // 4. 方法
+  string method = 4;
+  // 5. 描述
+  string desc = 5;
+}
+
+//接口删除
+message ApiDeleteReq {
+  // 1. ID
+  uint64 id = 1;
+}
+
+
+
+//操作响应参数，确认操作是否成功
+message OperationRes {
+  // 1. 状态
+  uint32 status = 1;
+  // 2. 信息
+  string msg = 2;
+}
+
+
+message Device {
+  // 1. 设备ID
+  uint64 id = 1;
+  // 2. 设备名称
+  string name = 2;
+  // 3. 设备编号
+  string code = 3;
+  // 4. 设备类型ID
+  uint64 deviceTypeId = 4;
+  // 5. 设备类型名称
+  string deviceTypeName = 5;
+}
+
+message DeviceCreateReq {
+  // 1. 设备名称
+  string name = 1;
+  // 2. 设备编号
+  string code = 2;
+  // 3. 设备类型编号
+  uint64 deviceTypeId = 3;
+  // 4. 设备类型名称
+  string deviceTypeName = 4;
+}
+
+message DeviceGetReq {
+  // 1. 设备名称
+  string name = 1;
+  // 2. 编号
+  string code = 2;
+  // 3. 协议
+  string protocol = 3;
+  // 4. 设备类型名称
+  string deviceTypeName = 4;
+  // 5. 设备状态
+  string state = 5;
+  // 6. 页大小
+  uint64 pageSize = 6;
+  // 7. 开始时间
+  string startTime = 7;
+  // 8. 结束时间
+  string endTime = 8;
+  // 9. 页码
+  uint64 currPage = 9;
+  // 10. 设备ID
+  uint64 id = 10;
+}
+
+message DeviceGetRes {
+  // 1. 设备信息
+  repeated Device device = 1;
+  // 2. 数量
+  uint64 count = 2;
+}
+
+message DeviceUpdateReq {
+  // 1. 设备ID
+  uint64 id = 1;
+  // 2. 设备名称
+  string name = 2;
+  // 3. 设备编号
+  string code = 3;
+  // 4. 设备类型名称
+  string deviceTypeName = 4;
+}
+
+message DeviceDeleteReq {
+  // 1. 设备ID
+  uint64 id = 1;
+}
+
+
+message DeviceType {
+  // 1. 设备类型ID
+  uint64 id = 1;
+  // 2. 设备类型名称
+  string name = 2;
+  // 3. 协议
+  string protocol = 3;
+}
+
+
+message DeviceTypeCreateReq {
+  // 1. 设备类型ID
+  uint64 id = 1;
+  // 2. 设备类型名称
+  string name = 2;
+  // 3. 协议
+  string protocol = 3;
+}
+
+message DeviceTypeGetReq {
+  // 1. 设备类型名称
+  string name = 1;
+  // 2. 页大小
+  uint64 pageSize = 2;
+  // 3. 开始时间
+  string startTime = 3;
+  // 4. 结束时间
+  string endTime = 4;
+  // 5. 页码
+  uint64 currPage = 5;
+  // 6. 设备类型ID
+  uint64 id = 6;
+}
+
+message DeviceTypeGetRes {
+  // 1. 设备类型信息
+  repeated DeviceType deviceType = 1;
+  // 2. 数量
+  uint64 count = 2;
+}
+
+message DeviceTypeUpdateReq {
+  // 1. 设备类型ID
+  uint64 id = 1;
+  // 2. 设备类型名称
+  string name = 2;
+  // 3. 协议
+  string protocol = 3;
+}
+
+message DeviceTypeDeleteReq {
+  // 1. 设备类型ID
+  uint64 id = 1;
+}
+
+message UserDeviceCreateReq {
+  // 1. 用户账号
+  string account = 1;
+  // 2. 设备编号
+  string deviceCode = 2;
+}
+
+message UserDeviceGetReq {
+  // 1. 用户名称
+  string userName = 1;
+  // 2. 设备名称
+  string deviceName = 2;
+  // 3. 设备编号
+  string deviceCode = 3;
+  // 4. 页码
+  uint64 currPage = 4;
+  // 5. 页大小
+  uint64 pageSize = 5;
+  // 6. 开始时间
+  string startTime = 6;
+  // 7. 结束时间
+  string endTime = 7;
+}
+
+message UserDevice {
+  // 1. 用户设备信息ID
+  uint64 id = 1;
+  // 2. 用户名称
+  string userName = 2;
+  // 3. 设备名称
+  string deviceName = 3;
+  // 4. 设备编号
+  string deviceCode = 4;
+  // 5. 创建时间
+  string createTime = 5;
+}
+
+message UserDeviceGetRes {
+  // 1. 用户设备信息
+  repeated UserDevice userDevice = 1;
+  // 2. 数量
+  uint64 count = 2;
+}
+
+message UserDeviceDeleteReq {
+  // 1. ID
+  uint64 id = 1;
+}

@@ -1,0 +1,2317 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "inner_core api docs",
+    "version": "2.0"
+  },
+  "tags": [
+    {
+      "name": "DataVisualization"
+    },
+    {
+      "name": "Manager"
+    }
+  ],
+  "host": "127.0.0.1:8080",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/api/create": {
+      "post": {
+        "summary": "接口创建",
+        "description": "本接口为接口创建接口",
+        "operationId": "Manager_ApiCreate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ApiCreateReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/api/delete": {
+      "post": {
+        "summary": "接口删除",
+        "description": "本接口为接口删除接口",
+        "operationId": "Manager_ApiDelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ApiDeleteReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/api/get": {
+      "post": {
+        "summary": "接口查询",
+        "description": "本接口为接口查询接口",
+        "operationId": "Manager_ApiGet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ApiGetRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ApiGetReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/api/update": {
+      "post": {
+        "summary": "接口修改",
+        "description": "本接口为接口修改接口",
+        "operationId": "Manager_ApiUpdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ApiUpdateReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/dataVisualization/chart": {
+      "post": {
+        "summary": "设备数据可视化",
+        "description": "本接口为设备数据可视化接口",
+        "operationId": "DataVisualization_DeviceDataCurve",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeviceDataCurveRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "description": "1. 用户ID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "uint64"
+          },
+          {
+            "name": "deviceCode",
+            "description": "2. 设备编号",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "interval",
+            "description": "3. 时间间隔\n\n - Null: 1. 空\n - Day: 2. 天\n - Week: 3. 星期\n - Month: 4 . 月",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Null",
+              "Day",
+              "Week",
+              "Month"
+            ],
+            "default": "Null"
+          },
+          {
+            "name": "chartType",
+            "description": "4. 图类型\n\n - ChartTypeNull: 1. 空\n - Pip: 1.饼图\n - Line: 2.折线图",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ChartTypeNull",
+                "Pip",
+                "Line"
+              ]
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "DataVisualization"
+        ]
+      }
+    },
+    "/api/v1/dataVisualization/getDeviceData": {
+      "post": {
+        "summary": "查询设备数据",
+        "description": "本接口为查询设备数据接口",
+        "operationId": "DataVisualization_DeviceDataGet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeviceDataGetRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeviceDataGetReq"
+            }
+          }
+        ],
+        "tags": [
+          "DataVisualization"
+        ]
+      }
+    },
+    "/api/v1/device/create": {
+      "post": {
+        "summary": "设备创建",
+        "description": "本接口为设备创建接口",
+        "operationId": "Manager_DeviceCreate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeviceCreateReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/device/dataPush": {
+      "get": {
+        "summary": "设备数据推送",
+        "description": "本接口为设备数据推送接口",
+        "operationId": "DataVisualization_DeviceDataPush",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeviceDataPushRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "code",
+            "description": "1. 设备编号",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DataVisualization"
+        ]
+      }
+    },
+    "/api/v1/device/dateReceive": {
+      "post": {
+        "summary": "设备数据接收",
+        "description": "本接口为设备数据接收接口",
+        "operationId": "Manager_DeviceDataReceive",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeviceDataReceiveReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/device/delete": {
+      "post": {
+        "summary": "设备删除",
+        "description": "本接口为设备删除接口",
+        "operationId": "Manager_DeviceDelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeviceDeleteReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/device/get": {
+      "post": {
+        "summary": "设备查询",
+        "description": "本接口为设备查询接口",
+        "operationId": "Manager_DeviceGet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeviceGetRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeviceGetReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/device/update": {
+      "post": {
+        "summary": "设备修改",
+        "description": "本接口为设备修改接口",
+        "operationId": "Manager_DeviceUpdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeviceUpdateReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/deviceType/create": {
+      "post": {
+        "summary": "设备类型创建",
+        "description": "本接口为设备类型创建接口",
+        "operationId": "Manager_DeviceTypeCreate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeviceTypeCreateReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/deviceType/delete": {
+      "post": {
+        "summary": "设备类型删除",
+        "description": "本接口为设备类型删除接口",
+        "operationId": "Manager_DeviceTypeDelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeviceTypeDeleteReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/deviceType/get": {
+      "post": {
+        "summary": "设备类型查询",
+        "description": "本接口为设备类型查询接口",
+        "operationId": "Manager_DeviceTypeGet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeviceTypeGetRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeviceTypeGetReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/deviceType/update": {
+      "post": {
+        "summary": "设备类型更新",
+        "description": "本接口为设备类型更新接口",
+        "operationId": "Manager_DeviceTypeUpdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeviceTypeUpdateReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/login": {
+      "post": {
+        "summary": "登录",
+        "description": "本接口为用户登录接口",
+        "operationId": "Manager_Login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1LoginRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1LoginReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/role/create": {
+      "post": {
+        "summary": "角色创建",
+        "description": "本接口为角色创建接口",
+        "operationId": "Manager_RoleCreate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RoleCreateReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/role/delete": {
+      "post": {
+        "summary": "角色删除",
+        "description": "本接口为角色删除接口",
+        "operationId": "Manager_RoleDelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RoleDeleteReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/role/get": {
+      "post": {
+        "summary": "角色查询",
+        "description": "本接口为角色查询接口",
+        "operationId": "Manager_RoleGet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1RoleGetRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RoleGetReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/role/update": {
+      "post": {
+        "summary": "角色修改",
+        "description": "本接口为角色修改接口",
+        "operationId": "Manager_RoleUpdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RoleUpdateReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/user/delete": {
+      "post": {
+        "summary": "用户删除",
+        "description": "本接口为用户删除接口",
+        "operationId": "Manager_UserDelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UserDeleteReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/user/get": {
+      "post": {
+        "summary": "用户查询",
+        "description": "本接口为用户查询接口",
+        "operationId": "Manager_UserGet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UserGetRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UserGetReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/user/register": {
+      "post": {
+        "summary": "用户注册",
+        "description": "本接口为用户注册接口",
+        "operationId": "Manager_UserRegister",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UserRegisterReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/user/resetPassword": {
+      "post": {
+        "summary": "用户密码重置",
+        "description": "本接口为用户密码重置接口",
+        "operationId": "Manager_ResetPassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ResetPasswordReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/user/update": {
+      "post": {
+        "summary": "用户修改",
+        "description": "本接口为用户修改接口",
+        "operationId": "Manager_UserUpdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UserUpdateReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/userDevice/create": {
+      "post": {
+        "summary": "用户设备信息创建",
+        "description": "本接口为用户信息创建接口",
+        "operationId": "Manager_UserDeviceCreate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UserDeviceCreateReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/userDevice/delete": {
+      "post": {
+        "summary": "用户信息删除",
+        "description": "本接口为用户信息删除接口",
+        "operationId": "Manager_UserDeviceDelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1OperationRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UserDeviceDeleteReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    },
+    "/api/v1/userDevice/get": {
+      "post": {
+        "summary": "用户设备信息查询",
+        "description": "本接口为用户信息查询接口",
+        "operationId": "Manager_UserDeviceGet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UserDeviceGetRes"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UserDeviceGetReq"
+            }
+          }
+        ],
+        "tags": [
+          "Manager"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "commonDataDetail": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "1. 键名称"
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "title": "2. 键值"
+        },
+        "unit": {
+          "type": "string",
+          "title": "3. 单位"
+        }
+      }
+    },
+    "commonDeviceData": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "1. 设备编号"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commonDataDetail"
+          },
+          "title": "2. 详细数据"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "3. 创建时间"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+        }
+      },
+      "additionalProperties": {},
+      "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := \u0026pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1Api": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "url": {
+          "type": "string",
+          "title": "3. 路径"
+        },
+        "method": {
+          "type": "string",
+          "title": "4. 方法"
+        },
+        "desc": {
+          "type": "string",
+          "title": "5. 描述"
+        }
+      },
+      "title": "接口"
+    },
+    "v1ApiCreateReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "url": {
+          "type": "string",
+          "title": "3. 路径"
+        },
+        "method": {
+          "type": "string",
+          "title": "4. 方法"
+        },
+        "desc": {
+          "type": "string",
+          "title": "5. 描述"
+        }
+      },
+      "title": "接口创建"
+    },
+    "v1ApiDeleteReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        }
+      },
+      "title": "接口删除"
+    },
+    "v1ApiGetReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "url": {
+          "type": "string",
+          "title": "3. 路径"
+        },
+        "method": {
+          "type": "string",
+          "title": "4. 方法"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "5. 页大小"
+        },
+        "startTime": {
+          "type": "string",
+          "title": "6. 开始时间"
+        },
+        "endTime": {
+          "type": "string",
+          "title": "7. 结束时间"
+        },
+        "currPage": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "8. 页码"
+        }
+      },
+      "title": "接口查询"
+    },
+    "v1ApiGetRes": {
+      "type": "object",
+      "properties": {
+        "api": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Api"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "uint64"
+        }
+      },
+      "title": "接口查询响应参数"
+    },
+    "v1ApiUpdateReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "url": {
+          "type": "string",
+          "title": "3. 路径"
+        },
+        "method": {
+          "type": "string",
+          "title": "4. 方法"
+        },
+        "desc": {
+          "type": "string",
+          "title": "5. 描述"
+        }
+      },
+      "title": "接口修改"
+    },
+    "v1ChartType": {
+      "type": "string",
+      "enum": [
+        "ChartTypeNull",
+        "Pip",
+        "Line"
+      ],
+      "default": "ChartTypeNull",
+      "title": "- ChartTypeNull: 1. 空\n - Pip: 1.饼图\n - Line: 2.折线图"
+    },
+    "v1DataLine": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "1. 名称"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "title": "2. 值"
+        }
+      }
+    },
+    "v1Device": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. 设备ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 设备名称"
+        },
+        "code": {
+          "type": "string",
+          "title": "3. 设备编号"
+        },
+        "deviceTypeId": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "4. 设备类型ID"
+        },
+        "deviceTypeName": {
+          "type": "string",
+          "title": "5. 设备类型名称"
+        },
+        "state": {
+          "type": "integer",
+          "format": "int64",
+          "title": "6. 设备状态"
+        },
+        "checkTime": {
+          "type": "number",
+          "format": "float",
+          "title": "7. 心跳时间"
+        }
+      }
+    },
+    "v1DeviceCreateReq": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "1. 设备名称"
+        },
+        "code": {
+          "type": "string",
+          "title": "2. 设备编号"
+        },
+        "deviceTypeId": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "3. 设备类型编号"
+        },
+        "checkTime": {
+          "type": "number",
+          "format": "float",
+          "title": "4. 心跳时间"
+        }
+      }
+    },
+    "v1DeviceDataCurveRes": {
+      "type": "object",
+      "properties": {
+        "month": {
+          "$ref": "#/definitions/v1DataLine",
+          "title": "1. 近一个月数据量"
+        },
+        "pip": {
+          "$ref": "#/definitions/v1DataLine",
+          "title": "2. 饼图"
+        },
+        "line": {
+          "$ref": "#/definitions/v1DataLine",
+          "title": "3. 折线图"
+        },
+        "elect": {
+          "$ref": "#/definitions/v1DataLine",
+          "title": "4. 电流"
+        },
+        "volt": {
+          "$ref": "#/definitions/v1DataLine",
+          "title": "5. 电压"
+        }
+      }
+    },
+    "v1DeviceDataGetReq": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "1. 设备名称"
+        },
+        "code": {
+          "type": "string",
+          "title": "2. 设备编号"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "3. 页大小"
+        },
+        "startTime": {
+          "type": "string",
+          "title": "4. 开始时间"
+        },
+        "endTime": {
+          "type": "string",
+          "title": "5. 结束时间"
+        },
+        "currPage": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "6. 页码"
+        },
+        "userId": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "7. 用户ID"
+        }
+      }
+    },
+    "v1DeviceDataGetRes": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "1. 设备名称"
+        },
+        "code": {
+          "type": "string",
+          "title": "2. 设备编号"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commonDeviceData"
+          },
+          "title": "3. 设备数据"
+        },
+        "count": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "4. 数据量"
+        }
+      }
+    },
+    "v1DeviceDataPushRes": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "1. 设备名称"
+        },
+        "code": {
+          "type": "string",
+          "title": "2. 设备编号"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commonDataDetail"
+          },
+          "title": "3. 设备数据"
+        }
+      }
+    },
+    "v1DeviceDataReceiveReq": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commonDeviceData"
+          },
+          "title": "1. 设备数据，json格式"
+        }
+      }
+    },
+    "v1DeviceDeleteReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. 设备ID"
+        }
+      }
+    },
+    "v1DeviceGetReq": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "1. 设备名称"
+        },
+        "code": {
+          "type": "string",
+          "title": "2. 编号"
+        },
+        "protocol": {
+          "type": "string",
+          "title": "3. 协议"
+        },
+        "deviceTypeName": {
+          "type": "string",
+          "title": "4. 设备类型名称"
+        },
+        "state": {
+          "type": "string",
+          "title": "5. 设备状态"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "6. 页大小"
+        },
+        "startTime": {
+          "type": "string",
+          "title": "7. 开始时间"
+        },
+        "endTime": {
+          "type": "string",
+          "title": "8. 结束时间"
+        },
+        "currPage": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "9. 页码"
+        },
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "10. 设备ID"
+        }
+      }
+    },
+    "v1DeviceGetRes": {
+      "type": "object",
+      "properties": {
+        "device": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Device"
+          },
+          "title": "1. 设备信息"
+        },
+        "count": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "2. 数量"
+        }
+      }
+    },
+    "v1DeviceType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. 设备类型ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 设备类型名称"
+        },
+        "describe": {
+          "type": "string",
+          "title": "3. 简述"
+        }
+      }
+    },
+    "v1DeviceTypeCreateReq": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "1. 设备类型名称"
+        },
+        "describe": {
+          "type": "string",
+          "title": "2. 简述"
+        }
+      }
+    },
+    "v1DeviceTypeDeleteReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. 设备类型ID"
+        }
+      }
+    },
+    "v1DeviceTypeGetReq": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "1. 设备类型名称"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "2. 页大小"
+        },
+        "startTime": {
+          "type": "string",
+          "title": "3. 开始时间"
+        },
+        "endTime": {
+          "type": "string",
+          "title": "4. 结束时间"
+        },
+        "currPage": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "5. 页码"
+        },
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "6. 设备类型ID"
+        }
+      }
+    },
+    "v1DeviceTypeGetRes": {
+      "type": "object",
+      "properties": {
+        "deviceType": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1DeviceType"
+          },
+          "title": "1. 设备类型信息"
+        },
+        "count": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "2. 数量"
+        }
+      }
+    },
+    "v1DeviceTypeUpdateReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. 设备类型ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 设备类型名称"
+        },
+        "describe": {
+          "type": "string",
+          "title": "3. 简述"
+        }
+      }
+    },
+    "v1DeviceUpdateReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. 设备ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 设备名称"
+        },
+        "code": {
+          "type": "string",
+          "title": "3. 设备编号"
+        },
+        "deviceTypeId": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "4. 设备类型ID"
+        },
+        "checkTime": {
+          "type": "number",
+          "format": "float",
+          "title": "5. 心跳时间"
+        }
+      }
+    },
+    "v1IntervalType": {
+      "type": "string",
+      "enum": [
+        "Null",
+        "Day",
+        "Week",
+        "Month"
+      ],
+      "default": "Null",
+      "title": "- Null: 1. 空\n - Day: 2. 天\n - Week: 3. 星期\n - Month: 4 . 月"
+    },
+    "v1LoginReq": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string",
+          "title": "1. 账户"
+        },
+        "password": {
+          "type": "string",
+          "title": "2. 密码"
+        }
+      },
+      "title": "登录请求参数"
+    },
+    "v1LoginRes": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "title": "1. token"
+        },
+        "user": {
+          "$ref": "#/definitions/v1User",
+          "title": "2. 用户"
+        }
+      },
+      "title": "登录响应参数"
+    },
+    "v1OperationRes": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int64",
+          "title": "1. 状态"
+        },
+        "msg": {
+          "type": "string",
+          "title": "2. 信息"
+        }
+      },
+      "title": "操作响应参数，确认操作是否成功"
+    },
+    "v1ResetPasswordReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "account": {
+          "type": "string",
+          "title": "3. 账户"
+        },
+        "avatarUrl": {
+          "type": "string",
+          "title": "4. 头像地址"
+        },
+        "isValid": {
+          "type": "integer",
+          "format": "int64",
+          "title": "5. 是否启用"
+        },
+        "sex": {
+          "type": "string",
+          "title": "6. 性别"
+        },
+        "phone": {
+          "type": "string",
+          "title": "7. 电话号码"
+        },
+        "roleId": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "8. roleID"
+        },
+        "password": {
+          "type": "string",
+          "title": "9. 密码"
+        }
+      },
+      "title": "用户密码重置请求参数"
+    },
+    "v1Role": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "code": {
+          "type": "string",
+          "title": "3. 编号"
+        },
+        "apis": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "uint64"
+          },
+          "title": "4. 接口"
+        },
+        "desc": {
+          "type": "string",
+          "title": "5. 描述"
+        }
+      },
+      "title": "角色"
+    },
+    "v1RoleCreateReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "code": {
+          "type": "string",
+          "title": "3. 编号"
+        },
+        "apis": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "uint64"
+          },
+          "title": "4. 接口"
+        },
+        "desc": {
+          "type": "string",
+          "title": "5. 描述"
+        }
+      },
+      "title": "角色创建请求参数"
+    },
+    "v1RoleDeleteReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "code": {
+          "type": "string",
+          "title": "3. 编号"
+        },
+        "apis": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "uint64"
+          },
+          "title": "4. 接口"
+        },
+        "desc": {
+          "type": "string",
+          "title": "5. 描述"
+        }
+      },
+      "title": "角色删除"
+    },
+    "v1RoleGetReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "code": {
+          "type": "string",
+          "title": "2. 编号"
+        },
+        "name": {
+          "type": "string",
+          "title": "3. 名称"
+        },
+        "currPage": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "4. 页码"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "5. 页大小"
+        },
+        "startTime": {
+          "type": "string",
+          "title": "6. 开始时间"
+        },
+        "endTime": {
+          "type": "string",
+          "title": "7. 结束时间"
+        }
+      },
+      "title": "角色查询"
+    },
+    "v1RoleGetRes": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1Role"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "uint64"
+        }
+      },
+      "title": "角色查询响应参数"
+    },
+    "v1RoleUpdateReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "code": {
+          "type": "string",
+          "title": "3. 编号"
+        },
+        "apis": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "uint64"
+          },
+          "title": "4. 接口"
+        },
+        "desc": {
+          "type": "string",
+          "title": "5. 描述"
+        }
+      },
+      "title": "角色修改"
+    },
+    "v1User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "account": {
+          "type": "string",
+          "title": "3. 账户"
+        },
+        "avatarUrl": {
+          "type": "string",
+          "title": "4. 头像地址"
+        },
+        "isValid": {
+          "type": "integer",
+          "format": "int64",
+          "title": "5. 是否启用"
+        },
+        "sex": {
+          "type": "string",
+          "title": "6. 性别"
+        },
+        "phone": {
+          "type": "string",
+          "title": "7. 电话号码"
+        },
+        "roleId": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "8. roleID"
+        },
+        "password": {
+          "type": "string",
+          "title": "9. 密码"
+        }
+      },
+      "title": "用户"
+    },
+    "v1UserDeleteReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "account": {
+          "type": "string",
+          "title": "3. 账户"
+        },
+        "avatarUrl": {
+          "type": "string",
+          "title": "4. 头像地址"
+        },
+        "isValid": {
+          "type": "integer",
+          "format": "int64",
+          "title": "5. 是否启用"
+        },
+        "sex": {
+          "type": "string",
+          "title": "6. 性别"
+        },
+        "phone": {
+          "type": "string",
+          "title": "7. 电话号码"
+        },
+        "roleId": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "8. roleID"
+        },
+        "password": {
+          "type": "string",
+          "title": "9. 密码"
+        }
+      },
+      "title": "用户注销请求参数"
+    },
+    "v1UserDevice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. 用户设备信息ID"
+        },
+        "userName": {
+          "type": "string",
+          "title": "2. 用户名称"
+        },
+        "deviceName": {
+          "type": "string",
+          "title": "3. 设备名称"
+        },
+        "deviceCode": {
+          "type": "string",
+          "title": "4. 设备编号"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "5. 创建时间"
+        }
+      }
+    },
+    "v1UserDeviceCreateReq": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string",
+          "title": "1. 用户账号"
+        },
+        "deviceCode": {
+          "type": "string",
+          "title": "2. 设备编号"
+        }
+      }
+    },
+    "v1UserDeviceDeleteReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        }
+      }
+    },
+    "v1UserDeviceGetReq": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "title": "1. 用户名称"
+        },
+        "deviceName": {
+          "type": "string",
+          "title": "2. 设备名称"
+        },
+        "deviceCode": {
+          "type": "string",
+          "title": "3. 设备编号"
+        },
+        "currPage": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "4. 页码"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "5. 页大小"
+        },
+        "startTime": {
+          "type": "string",
+          "title": "6. 开始时间"
+        },
+        "endTime": {
+          "type": "string",
+          "title": "7. 结束时间"
+        }
+      }
+    },
+    "v1UserDeviceGetRes": {
+      "type": "object",
+      "properties": {
+        "userDevice": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1UserDevice"
+          },
+          "title": "1. 用户设备信息"
+        },
+        "count": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "2. 数量"
+        }
+      }
+    },
+    "v1UserGetReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "phone": {
+          "type": "string",
+          "title": "3. 手机号"
+        },
+        "currPage": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "4. 页码"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "5. 页大小"
+        },
+        "startTime": {
+          "type": "string",
+          "title": "6. 开始时间"
+        },
+        "endTime": {
+          "type": "string",
+          "title": "7. 结束时间"
+        }
+      },
+      "title": "用户查询请求参数"
+    },
+    "v1UserGetRes": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1User"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "uint64"
+        }
+      }
+    },
+    "v1UserRegisterReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "account": {
+          "type": "string",
+          "title": "3. 账户"
+        },
+        "avatarUrl": {
+          "type": "string",
+          "title": "4. 头像地址"
+        },
+        "isValid": {
+          "type": "integer",
+          "format": "int64",
+          "title": "5. 是否启用"
+        },
+        "sex": {
+          "type": "string",
+          "title": "6. 性别"
+        },
+        "phone": {
+          "type": "string",
+          "title": "7. 电话号码"
+        },
+        "roleIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "uint64"
+          },
+          "title": "8. roleIDs"
+        },
+        "password": {
+          "type": "string",
+          "title": "9. 密码"
+        }
+      },
+      "title": "用户注册请求参数"
+    },
+    "v1UserUpdateReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uint64",
+          "title": "1. ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "2. 名称"
+        },
+        "account": {
+          "type": "string",
+          "title": "3. 账户"
+        },
+        "avatarUrl": {
+          "type": "string",
+          "title": "4. 头像地址"
+        },
+        "isValid": {
+          "type": "integer",
+          "format": "int64",
+          "title": "5. 是否启用"
+        },
+        "sex": {
+          "type": "string",
+          "title": "6. 性别"
+        },
+        "phone": {
+          "type": "string",
+          "title": "7. 电话号码"
+        },
+        "roleId": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "uint64"
+          },
+          "title": "8. roleID"
+        }
+      },
+      "title": "用户修改请求参数"
+    }
+  },
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "apiKey",
+      "description": "Input a \"Bearer your-jwt-token\" to Value",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}
